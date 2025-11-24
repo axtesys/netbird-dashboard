@@ -22,7 +22,8 @@ interface PostureCheckAction {
     | "location"
     | "os"
     | "network_range"
-    | "process_check";
+    | "process_check"
+    | "certificate_check";
   payload: any;
 }
 
@@ -79,6 +80,15 @@ const postureCheckReducer = (
         },
       };
 
+    case "certificate_check":
+      return {
+        ...state,
+        checks: {
+          ...state.checks,
+          certificate_check: action.payload,
+        },
+      };
+
     default:
       return state;
   }
@@ -102,6 +112,7 @@ export const usePostureCheck = ({ postureCheck, onSuccess }: Props = {}) => {
         geo_location_check: undefined,
         os_version_check: undefined,
         peer_network_range_check: undefined,
+        certificate_check: undefined,
       },
     },
   );

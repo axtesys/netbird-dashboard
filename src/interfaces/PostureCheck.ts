@@ -11,6 +11,7 @@ export interface PostureCheck {
     geo_location_check?: GeoLocationCheck;
     peer_network_range_check?: PeerNetworkRangeCheck;
     process_check?: ProcessCheck;
+    certificate_check?: CertificateCheck;
   };
   policies?: Policy[];
   active?: boolean;
@@ -56,6 +57,9 @@ export interface PeerNetworkRangeCheck {
 
 export interface ProcessCheck {
   processes: Process[];
+}
+
+export interface CertificateCheck {
 }
 
 export interface Process {

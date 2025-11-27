@@ -45,7 +45,9 @@ export const compareVersions = (
   minVersion: string,
 ): boolean => {
   const parseVersion = (v: string): number[] => {
-    return v.replace(/^v/, "").split(".").map(Number);
+    return v.replace(/^v/, "")
+        .split("-")[0]
+        .split(".").map(Number);
   };
 
   const vParts = parseVersion(version);

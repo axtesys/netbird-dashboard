@@ -48,7 +48,7 @@ export default function WindowsTab({
                 options={[
                   {
                     label: "64-Bit",
-                    value: "https://exchange.axtesys.at/index.php/f/6774",
+                    value: "https://exchange.axtesys.at/index.php/f/6819",
                   },
                   // {
                   //   label: "ARM64",

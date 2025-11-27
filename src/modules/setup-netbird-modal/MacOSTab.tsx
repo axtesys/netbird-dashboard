@@ -34,6 +34,8 @@ type Props = {
   showSetupKeyInfo?: boolean;
   hostname?: string;
 };
+
+// AXTESYS CHANGE: Customize MacOS installation instructions
 export default function MacOSTab({
   setupKey,
   showSetupKeyInfo,
@@ -79,8 +81,8 @@ export default function MacOSTab({
             </div>
             <div className={"flex gap-4 mt-1 flex-wrap"}>
               <Link
-                href={"https://pkgs.netbird.io/macos/universal"}
-                passHref
+                  href={"https://exchange.axtesys.at/index.php/f/6774"}
+                  passHref
                 target={"_blank"}
               >
                 <Button variant={"primary"}>
@@ -132,100 +134,100 @@ export default function MacOSTab({
           )}
         </Steps>
       </TabsContentPadding>
-      <Separator />
-      <TabsContentPadding>
-        <Accordion type="single" collapsible>
-          <AccordionItem value="item-1">
-            <AccordionTrigger>
-              <TerminalSquareIcon size={16} />
-              Install manually with Terminal
-            </AccordionTrigger>
-            <AccordionContent>
-              <Steps>
-                <Steps.Step step={1}>
-                  <Code>
-                    curl -fsSL https://pkgs.netbird.io/install.sh | sh
-                  </Code>
-                </Steps.Step>
-                <Steps.Step step={2} line={false}>
-                  <p>
-                    Run NetBird {!setupKey && "and log in the browser"}
-                    {showSetupKeyInfo && <RoutingPeerSetupKeyInfo />}
-                  </p>
-                  <Code>
-                    <Code.Line>
-                      {getNetBirdUpCommand()}
-                      <SetupKeyParameter setupKey={setupKey} />
-                      <HostnameParameter hostname={hostname} />
-                    </Code.Line>
-                  </Code>
-                </Steps.Step>
-              </Steps>
-            </AccordionContent>
-          </AccordionItem>
-        </Accordion>
-      </TabsContentPadding>
-      <Separator />
-      <TabsContentPadding>
-        <Accordion type="single" collapsible>
-          <AccordionItem value="item-1">
-            <AccordionTrigger>
-              <BeerIcon size={16} /> Install manually with HomeBrew
-            </AccordionTrigger>
-            <AccordionContent>
-              <Steps>
-                <Steps.Step step={1}>
-                  <p>Download and install HomeBrew</p>
-                  <div className={"flex gap-4"}>
-                    <Link href={"https://brew.sh/"} passHref target={"_blank"}>
-                      <Button variant={"primary"}>
-                        <ExternalLinkIcon size={14} />
-                        HomeBrew Installation Guide
-                      </Button>
-                    </Link>
-                  </div>
-                </Steps.Step>
-                <Steps.Step step={2}>
-                  <p>Install NetBird </p>
-                  <Code
-                    codeToCopy={[
-                      `brew install netbirdio/tap/netbird`,
-                      `brew install --cask netbirdio/tap/netbird-ui`,
-                    ].join("\n")}
-                  >
-                    <Code.Comment># for CLI only</Code.Comment>
-                    <Code.Line>brew install netbirdio/tap/netbird</Code.Line>
-                    <Code.Comment># for GUI package</Code.Comment>
-                    <Code.Line>
-                      brew install --cask netbirdio/tap/netbird-ui
-                    </Code.Line>
-                  </Code>
-                </Steps.Step>
-                <Steps.Step step={3}>
-                  <p>Start NetBird daemon</p>
-                  <Code>
-                    <Code.Line>sudo netbird service install</Code.Line>
-                    <Code.Line>sudo netbird service start</Code.Line>
-                  </Code>
-                </Steps.Step>
-                <Steps.Step step={4} line={false}>
-                  <p>
-                    Run NetBird {!setupKey && "and log in the browser"}
-                    {showSetupKeyInfo && <RoutingPeerSetupKeyInfo />}
-                  </p>
-                  <Code>
-                    <Code.Line>
-                      {getNetBirdUpCommand()}
-                      <SetupKeyParameter setupKey={setupKey} />
-                      <HostnameParameter hostname={hostname} />
-                    </Code.Line>
-                  </Code>
-                </Steps.Step>
-              </Steps>
-            </AccordionContent>
-          </AccordionItem>
-        </Accordion>
-      </TabsContentPadding>
+      {/*<Separator />*/}
+      {/*<TabsContentPadding>*/}
+      {/*  <Accordion type="single" collapsible>*/}
+      {/*    <AccordionItem value="item-1">*/}
+      {/*      <AccordionTrigger>*/}
+      {/*        <TerminalSquareIcon size={16} />*/}
+      {/*        Install manually with Terminal*/}
+      {/*      </AccordionTrigger>*/}
+      {/*      <AccordionContent>*/}
+      {/*        <Steps>*/}
+      {/*          <Steps.Step step={1}>*/}
+      {/*            <Code>*/}
+      {/*              curl -fsSL https://pkgs.netbird.io/install.sh | sh*/}
+      {/*            </Code>*/}
+      {/*          </Steps.Step>*/}
+      {/*          <Steps.Step step={2} line={false}>*/}
+      {/*            <p>*/}
+      {/*              Run NetBird {!setupKey && "and log in the browser"}*/}
+      {/*              {showSetupKeyInfo && <RoutingPeerSetupKeyInfo />}*/}
+      {/*            </p>*/}
+      {/*            <Code>*/}
+      {/*              <Code.Line>*/}
+      {/*                {getNetBirdUpCommand()}*/}
+      {/*                <SetupKeyParameter setupKey={setupKey} />*/}
+      {/*                <HostnameParameter hostname={hostname} />*/}
+      {/*              </Code.Line>*/}
+      {/*            </Code>*/}
+      {/*          </Steps.Step>*/}
+      {/*        </Steps>*/}
+      {/*      </AccordionContent>*/}
+      {/*    </AccordionItem>*/}
+      {/*  </Accordion>*/}
+      {/*</TabsContentPadding>*/}
+      {/*<Separator />*/}
+      {/*<TabsContentPadding>*/}
+      {/*  <Accordion type="single" collapsible>*/}
+      {/*    <AccordionItem value="item-1">*/}
+      {/*      <AccordionTrigger>*/}
+      {/*        <BeerIcon size={16} /> Install manually with HomeBrew*/}
+      {/*      </AccordionTrigger>*/}
+      {/*      <AccordionContent>*/}
+      {/*        <Steps>*/}
+      {/*          <Steps.Step step={1}>*/}
+      {/*            <p>Download and install HomeBrew</p>*/}
+      {/*            <div className={"flex gap-4"}>*/}
+      {/*              <Link href={"https://brew.sh/"} passHref target={"_blank"}>*/}
+      {/*                <Button variant={"primary"}>*/}
+      {/*                  <ExternalLinkIcon size={14} />*/}
+      {/*                  HomeBrew Installation Guide*/}
+      {/*                </Button>*/}
+      {/*              </Link>*/}
+      {/*            </div>*/}
+      {/*          </Steps.Step>*/}
+      {/*          <Steps.Step step={2}>*/}
+      {/*            <p>Install NetBird </p>*/}
+      {/*            <Code*/}
+      {/*              codeToCopy={[*/}
+      {/*                `brew install netbirdio/tap/netbird`,*/}
+      {/*                `brew install --cask netbirdio/tap/netbird-ui`,*/}
+      {/*              ].join("\n")}*/}
+      {/*            >*/}
+      {/*              <Code.Comment># for CLI only</Code.Comment>*/}
+      {/*              <Code.Line>brew install netbirdio/tap/netbird</Code.Line>*/}
+      {/*              <Code.Comment># for GUI package</Code.Comment>*/}
+      {/*              <Code.Line>*/}
+      {/*                brew install --cask netbirdio/tap/netbird-ui*/}
+      {/*              </Code.Line>*/}
+      {/*            </Code>*/}
+      {/*          </Steps.Step>*/}
+      {/*          <Steps.Step step={3}>*/}
+      {/*            <p>Start NetBird daemon</p>*/}
+      {/*            <Code>*/}
+      {/*              <Code.Line>sudo netbird service install</Code.Line>*/}
+      {/*              <Code.Line>sudo netbird service start</Code.Line>*/}
+      {/*            </Code>*/}
+      {/*          </Steps.Step>*/}
+      {/*          <Steps.Step step={4} line={false}>*/}
+      {/*            <p>*/}
+      {/*              Run NetBird {!setupKey && "and log in the browser"}*/}
+      {/*              {showSetupKeyInfo && <RoutingPeerSetupKeyInfo />}*/}
+      {/*            </p>*/}
+      {/*            <Code>*/}
+      {/*              <Code.Line>*/}
+      {/*                {getNetBirdUpCommand()}*/}
+      {/*                <SetupKeyParameter setupKey={setupKey} />*/}
+      {/*                <HostnameParameter hostname={hostname} />*/}
+      {/*              </Code.Line>*/}
+      {/*            </Code>*/}
+      {/*          </Steps.Step>*/}
+      {/*        </Steps>*/}
+      {/*      </AccordionContent>*/}
+      {/*    </AccordionItem>*/}
+      {/*  </Accordion>*/}
+      {/*</TabsContentPadding>*/}
     </TabsContent>
   );
 }

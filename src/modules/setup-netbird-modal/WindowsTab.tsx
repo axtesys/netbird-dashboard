@@ -20,13 +20,14 @@ type Props = {
   hostname?: string;
 };
 
+// AXTESYS CHANGE: Customize Windows installation instructions
 export default function WindowsTab({
   setupKey,
   showSetupKeyInfo,
   hostname,
 }: Readonly<Props>) {
   const [windowsUrl, setWindowsUrl] = useState(
-    "https://pkgs.netbird.io/windows/x64",
+    "https://exchange.axtesys.at/index.php/f/6774",
   );
   return (
     <TabsContent value={String(OperatingSystem.WINDOWS)}>
@@ -47,20 +48,20 @@ export default function WindowsTab({
                 options={[
                   {
                     label: "64-Bit",
-                    value: "https://pkgs.netbird.io/windows/x64",
+                    value: "https://exchange.axtesys.at/index.php/f/6774",
                   },
-                  {
-                    label: "ARM64",
-                    value: "https://pkgs.netbird.io/windows/arm64",
-                  },
-                  {
-                    label: "64-Bit (MSI)",
-                    value: "https://pkgs.netbird.io/windows/msi/x64",
-                  },
-                  {
-                    label: "ARM64 (MSI)",
-                    value: "https://pkgs.netbird.io/windows/msi/arm64",
-                  },
+                  // {
+                  //   label: "ARM64",
+                  //   value: "https://pkgs.netbird.io/windows/arm64",
+                  // },
+                  // {
+                  //   label: "64-Bit (MSI)",
+                  //   value: "https://pkgs.netbird.io/windows/msi/x64",
+                  // },
+                  // {
+                  //   label: "ARM64 (MSI)",
+                  //   value: "https://pkgs.netbird.io/windows/msi/arm64",
+                  // },
                 ]}
               />
               <Link

@@ -37,6 +37,7 @@ type Props = {
   className?: string;
 };
 
+// AXTESYS CHANGE: Customize installation instructions (remove mobile and docker tabs)
 export default function SetupModal({
   showClose = true,
   user,
@@ -197,20 +198,20 @@ export function SetupModalContent({
           hostname={hostname}
         />
 
-        {!setupKey && (
-          <>
-            <AndroidTab />
-            <IOSTab />
-          </>
-        )}
+        {/*{!setupKey && (*/}
+        {/*  <>*/}
+        {/*    <AndroidTab />*/}
+        {/*    <IOSTab />*/}
+        {/*  </>*/}
+        {/*)}*/}
 
-        {!hideDocker && (
-          <DockerTab
-            setupKey={setupKey}
-            showSetupKeyInfo={showOnlyRoutingPeerOS}
-            hostname={hostname}
-          />
-        )}
+        {/*{!hideDocker && (*/}
+        {/*  <DockerTab*/}
+        {/*    setupKey={setupKey}*/}
+        {/*    showSetupKeyInfo={showOnlyRoutingPeerOS}*/}
+        {/*    hostname={hostname}*/}
+        {/*  />*/}
+        {/*)}*/}
       </Tabs>
       {footer && (
         <ModalFooter variant={"setup"}>

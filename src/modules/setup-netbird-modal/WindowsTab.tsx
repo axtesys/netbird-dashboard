@@ -27,7 +27,7 @@ export default function WindowsTab({
   hostname,
 }: Readonly<Props>) {
   const [windowsUrl, setWindowsUrl] = useState(
-    "https://exchange.axtesys.at/index.php/f/6774",
+    "https://exchange.axtesys.at/index.php/f/6819",
   );
   return (
     <TabsContent value={String(OperatingSystem.WINDOWS)}>

@@ -149,37 +149,37 @@ export function SetupModalContent({
             macOS
           </TabsTrigger>
 
-          {!setupKey && (
-            <>
-              <TabsTrigger value={String(OperatingSystem.IOS)}>
-                <IOSIcon
-                  className={
-                    "fill-nb-gray-500 group-data-[state=active]/trigger:fill-netbird transition-all"
-                  }
-                />
-                iOS
-              </TabsTrigger>
-              <TabsTrigger value={String(OperatingSystem.ANDROID)}>
-                <AndroidIcon
-                  className={
-                    "fill-nb-gray-500 group-data-[state=active]/trigger:fill-netbird transition-all"
-                  }
-                />
-                Android
-              </TabsTrigger>
-            </>
-          )}
+          {/*{!setupKey && (*/}
+          {/*  <>*/}
+          {/*    <TabsTrigger value={String(OperatingSystem.IOS)}>*/}
+          {/*      <IOSIcon*/}
+          {/*        className={*/}
+          {/*          "fill-nb-gray-500 group-data-[state=active]/trigger:fill-netbird transition-all"*/}
+          {/*        }*/}
+          {/*      />*/}
+          {/*      iOS*/}
+          {/*    </TabsTrigger>*/}
+          {/*    <TabsTrigger value={String(OperatingSystem.ANDROID)}>*/}
+          {/*      <AndroidIcon*/}
+          {/*        className={*/}
+          {/*          "fill-nb-gray-500 group-data-[state=active]/trigger:fill-netbird transition-all"*/}
+          {/*        }*/}
+          {/*      />*/}
+          {/*      Android*/}
+          {/*    </TabsTrigger>*/}
+          {/*  </>*/}
+          {/*)}*/}
 
-          {!hideDocker && (
-            <TabsTrigger value={String(OperatingSystem.DOCKER)}>
-              <DockerIcon
-                className={
-                  "fill-nb-gray-500 group-data-[state=active]/trigger:fill-netbird transition-all"
-                }
-              />
-              Docker
-            </TabsTrigger>
-          )}
+          {/*{!hideDocker && (*/}
+          {/*  <TabsTrigger value={String(OperatingSystem.DOCKER)}>*/}
+          {/*    <DockerIcon*/}
+          {/*      className={*/}
+          {/*        "fill-nb-gray-500 group-data-[state=active]/trigger:fill-netbird transition-all"*/}
+          {/*      }*/}
+          {/*    />*/}
+          {/*    Docker*/}
+          {/*  </TabsTrigger>*/}
+          {/*)}*/}
         </TabsList>
 
         <LinuxTab

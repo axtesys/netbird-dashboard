@@ -10,7 +10,7 @@ import Steps from "@components/Steps";
 import TabsContentPadding, { TabsContent } from "@components/Tabs";
 import { IconBrandUbuntu } from "@tabler/icons-react";
 import { getNetBirdUpCommand } from "@utils/netbird";
-import { TerminalSquareIcon } from "lucide-react";
+import {DownloadIcon, TerminalSquareIcon} from "lucide-react";
 import React from "react";
 import { OperatingSystem } from "@/interfaces/OperatingSystem";
 import {
@@ -18,6 +18,8 @@ import {
   RoutingPeerSetupKeyInfo,
   SetupKeyParameter,
 } from "@/modules/setup-netbird-modal/SetupModal";
+import Link from "next/link";
+import Button from "@components/Button";
 
 type Props = {
   setupKey?: string;
@@ -41,12 +43,26 @@ export default function LinuxTab({
             <Steps>
                 <Steps.Step step={1}>
                     <p>
-                        Download .deb files from here: <a href="https://exchange.axtesys.at/index.php/f/6774">Download</a>
+                        Download .deb files from here:
                     </p>
-                    <Code>curl -fsSL https://pkgs.netbird.io/install.sh | sh</Code>
+                    <div className={"flex gap-4 mt-1 flex-wrap"}>
+                        <Link
+                            href={"https://exchange.axtesys.at/index.php/f/6820"}
+                            passHref
+                            target={"_blank"}
+                        >
+                            <Button variant={"primary"}>
+                                <DownloadIcon size={14} />
+                                Download NetBird
+                            </Button>
+                        </Link>
+                    </div>
                 </Steps.Step>
                 <Steps.Step step={2}>
-                    <Code>TODO: Add install commands here</Code>
+                    <Code>
+                        <Code.Line>dpkg -i ~/Downloads/netbird_0.60.3-axt.2_linux_amd64.deb</Code.Line>
+                        <Code.Line>dpkg -i ~/Downloads/netbird-ui_0.60.3-axt.2_linux_amd64.deb</Code.Line>
+                    </Code>
                 </Steps.Step>
                 <Steps.Step step={3} line={false}>
                     <p>

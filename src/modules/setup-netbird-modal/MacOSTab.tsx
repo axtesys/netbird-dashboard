@@ -81,7 +81,7 @@ export default function MacOSTab({
             </div>
             <div className={"flex gap-4 mt-1 flex-wrap"}>
               <Link
-                  href={"https://exchange.axtesys.at/index.php/f/6774"}
+                  href={"https://exchange.axtesys.at/index.php/f/6821"}
                   passHref
                 target={"_blank"}
               >

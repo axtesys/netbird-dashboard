@@ -19,14 +19,14 @@ import { usePermissions } from "@/contexts/PermissionsProvider";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { Group } from "@/interfaces/Group";
 import { NameserverGroup } from "@/interfaces/Nameserver";
-import NameserverModal from "@/modules/dns-nameservers/NameserverModal";
-import NameserverTemplateModal from "@/modules/dns-nameservers/NameserverTemplateModal";
-import NameserverActionCell from "@/modules/dns-nameservers/table/NameserverActionCell";
-import NameserverActiveCell from "@/modules/dns-nameservers/table/NameserverActiveCell";
-import NameserverDistributionGroupsCell from "@/modules/dns-nameservers/table/NameserverDistributionGroupsCell";
-import NameserverMatchDomainsCell from "@/modules/dns-nameservers/table/NameserverMatchDomainsCell";
-import NameserverNameCell from "@/modules/dns-nameservers/table/NameserverNameCell";
-import NameserverNameserversCell from "@/modules/dns-nameservers/table/NameserverNameserversCell";
+import NameserverModal from "@/modules/dns/nameservers/NameserverModal";
+import NameserverTemplateModal from "@/modules/dns/nameservers/NameserverTemplateModal";
+import NameserverActionCell from "@/modules/dns/nameservers/table/NameserverActionCell";
+import NameserverActiveCell from "@/modules/dns/nameservers/table/NameserverActiveCell";
+import NameserverDistributionGroupsCell from "@/modules/dns/nameservers/table/NameserverDistributionGroupsCell";
+import NameserverMatchDomainsCell from "@/modules/dns/nameservers/table/NameserverMatchDomainsCell";
+import NameserverNameCell from "@/modules/dns/nameservers/table/NameserverNameCell";
+import NameserverNameserversCell from "@/modules/dns/nameservers/table/NameserverNameserversCell";
 
 export const NameserverGroupTableColumns: ColumnDef<NameserverGroup>[] = [
   {
@@ -145,7 +145,7 @@ export default function NameserverGroupTable({
         wrapperProps={isGroupPage ? { className: "mt-6 w-full" } : undefined}
         paginationPaddingClassName={isGroupPage ? "px-0 pt-8" : undefined}
         tableClassName={isGroupPage ? "mt-0" : undefined}
-        inset={!isGroupPage}
+        inset={false}
         minimal={isGroupPage}
         showSearchAndFilters={isGroupPage}
         keepStateInLocalStorage={!isGroupPage}

@@ -2,7 +2,6 @@ name: build and push
 on:
   push:
     branches:
-      - "feature/**"
       - main
     tags:
       - "**"
@@ -20,7 +19,7 @@ jobs:
       - name: setup-node
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: '20'
           cache: 'npm'
 
       - name: Install dependencies
@@ -55,8 +54,19 @@ jobs:
           fileName: "ironrdp_web_bg.wasm"
           out-file-path: 'public/ironrdp-pkg'
 
+      - name: Get version from tag
+        id: version
+        run: |
+          if [[ "${{ github.ref }}" == refs/tags/* ]]; then
+            echo "version=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
+          else
+            echo "version=development" >> $GITHUB_OUTPUT
+          fi
+
       - name: Build
         run: npm run build
+        env:
+          NEXT_PUBLIC_DASHBOARD_VERSION: ${{ steps.version.outputs.version }}
       -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v2

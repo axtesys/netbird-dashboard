@@ -2,13 +2,13 @@ name: build and push
 on:
   push:
     branches:
-      - main
+      - axtesys/main
     tags:
-      - "**"
+      - "v*"
   pull_request:
 
 env:
-  IMAGE_NAME: netbirdio/dashboard
+  IMAGE_NAME: ghcr.io/axtesys-GmbH/netbird/dashboard
 
 jobs:
   build_n_push:
@@ -80,11 +80,12 @@ jobs:
         with:
           images: ${{ env.IMAGE_NAME }}
       -
-        name: Login to DockerHub
-        uses: docker/login-action@v2
+        name: Login to the GitHub container registry
+        uses: docker/login-action@v3
         with:
-          username: ${{ secrets.NB_DOCKER_USER }}
-          password: ${{ secrets.NB_DOCKER_TOKEN }}
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.CI_DOCKER_PUSH_GITHUB_TOKEN }}
       -
         name: Docker build and push
         uses: docker/build-push-action@v3

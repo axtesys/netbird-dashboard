@@ -129,7 +129,11 @@ export const usePostureCheck = ({ postureCheck, onSuccess }: Props = {}) => {
     checkToUpdateOrCreate?: PostureCheck,
   ) => {
     const call = () => updateOrCreate(checkToUpdateOrCreate || state);
-    let response = undefined;
+    const promise = call().then((check) => {
+      mutate("/posture-checks");
+      onSuccess && onSuccess(check);
+      return check;
+    });
     notify({
       title: `Posture Check ${state.name}`,
       description: `Posture Check was ${
@@ -138,17 +142,9 @@ export const usePostureCheck = ({ postureCheck, onSuccess }: Props = {}) => {
       loadingMessage: `${
         postureCheck ? "Updating" : "Creating"
       } your posture check...`,
-      promise: call().then((check) => {
-        mutate("/posture-checks");
-        onSuccess && onSuccess(check);
-        response = check;
-      }),
+      promise,
     });
-    if (response === undefined) {
-      return Promise.reject("Failed to create or update posture check");
-    } else {
-      return Promise.resolve(response);
-    }
+    return promise;
   };
 
   return { state, dispatch, updateOrCreateAndNotify, updateOrCreate };

@@ -122,19 +122,25 @@ export default function LinuxTab({
                   </div>
                 </Steps.Step>
                 <Steps.Step step={2}>
-                  <p>Install NetBird</p>
+                  <p>Add the brew tap</p>
                   <Code>
-                    <Code.Line>brew install netbirdio/tap/netbird</Code.Line>
+                    <Code.Line>brew tap axtesys-gmbh/netbird https://github.com/axtesys-GmbH/netbird-homebrew-tap.git</Code.Line>
                   </Code>
                 </Steps.Step>
                 <Steps.Step step={3}>
+                  <p>Install NetBird</p>
+                  <Code>
+                    <Code.Line>brew install axtesys-gmbh/netbird/netbird</Code.Line>
+                  </Code>
+                </Steps.Step>
+                <Steps.Step step={4}>
                   <p>Start NetBird daemon</p>
                   <Code>
                     <Code.Line>sudo netbird service install</Code.Line>
                     <Code.Line>sudo netbird service start</Code.Line>
                   </Code>
                 </Steps.Step>
-                <Steps.Step step={4} line={false}>
+                <Steps.Step step={5} line={false}>
                   <p>
                     Run NetBird {!setupKey && "and log in the browser"}
                     {showSetupKeyInfo && <RoutingPeerSetupKeyInfo />}

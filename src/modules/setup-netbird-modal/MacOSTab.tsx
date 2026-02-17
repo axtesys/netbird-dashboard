@@ -44,22 +44,28 @@ export default function MacOSTab({
             </div>
           </Steps.Step>
           <Steps.Step step={2}>
-            <p>Install NetBird</p>
-            <Code
-              codeToCopy={[
-                `brew install netbirdio/tap/netbird`,
-                `brew install --cask netbirdio/tap/netbird-ui`,
-              ].join("\n")}
-            >
-              <Code.Comment># for CLI only</Code.Comment>
-              <Code.Line>brew install netbirdio/tap/netbird</Code.Line>
-              <Code.Comment># for GUI package</Code.Comment>
-              <Code.Line>
-                brew install --cask netbirdio/tap/netbird-ui
-              </Code.Line>
+            <p>Add the brew tap</p>
+            <Code>
+              <Code.Line>brew tap axtesys-gmbh/netbird https://github.com/axtesys-GmbH/netbird-homebrew-tap.git</Code.Line>
             </Code>
           </Steps.Step>
           <Steps.Step step={3}>
+            <p>Install NetBird</p>
+            <Code
+              codeToCopy={[
+                `brew install axtesys-gmbh/netbird/netbird`,
+                `brew install --cask axtesys-gmbh/netbird/netbird-ui`,
+              ].join("\n")}
+            >
+              <Code.Comment># for CLI only</Code.Comment>
+              <Code.Line>brew install axtesys-gmbh/netbird/netbird</Code.Line>
+              <Code.Comment># for GUI package</Code.Comment>
+              <Code.Line>
+                brew install --cask axtesys-gmbh/netbird/netbird-ui
+              </Code.Line>
+            </Code>
+          </Steps.Step>
+          <Steps.Step step={4}>
             <p>Start NetBird daemon</p>
             <Code>
               <Code.Line>sudo netbird service install</Code.Line>
@@ -68,7 +74,7 @@ export default function MacOSTab({
           </Steps.Step>
 
           {GRPC_API_ORIGIN && (
-            <Steps.Step step={4}>
+            <Steps.Step step={5}>
               <p>
                 {`Click on "Settings" then "Advanced Settings" from the NetBird icon in your system tray and enter the following "Management URL"`}
               </p>
@@ -79,7 +85,7 @@ export default function MacOSTab({
           )}
 
           {setupKey ? (
-            <Steps.Step step={GRPC_API_ORIGIN ? 5 : 4} line={false}>
+            <Steps.Step step={GRPC_API_ORIGIN ? 6 : 5} line={false}>
               <p>
                 Run NetBird{" "}
                 {showSetupKeyInfo && <RoutingPeerSetupKeyInfo />}
@@ -94,13 +100,13 @@ export default function MacOSTab({
             </Steps.Step>
           ) : (
             <>
-              <Steps.Step step={GRPC_API_ORIGIN ? 5 : 4}>
+              <Steps.Step step={GRPC_API_ORIGIN ? 6 : 5}>
                 <p>
                   {/* eslint-disable-next-line react/no-unescaped-entities */}
                   Click on "Connect" from the NetBird icon in your system tray
                 </p>
               </Steps.Step>
-              <Steps.Step step={GRPC_API_ORIGIN ? 6 : 5} line={false}>
+              <Steps.Step step={GRPC_API_ORIGIN ? 7 : 6} line={false}>
                 <p>Sign up using your email address</p>
               </Steps.Step>
             </>

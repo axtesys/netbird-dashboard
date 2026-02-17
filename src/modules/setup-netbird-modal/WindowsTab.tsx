@@ -47,20 +47,8 @@ export default function WindowsTab({
                 options={[
                   {
                     label: "64-Bit",
-                    value: "https://netbird.axtesys.it/pkgs/windows/x64",
-                  },
-                  {
-                    label: "ARM64",
-                    value: "https://netbird.axtesys.it/pkgs/windows/arm64",
-                  },
-                  {
-                    label: "64-Bit (MSI)",
-                    value: "https://netbird.axtesys.it/pkgs/windows/msi/x64",
-                  },
-                  {
-                    label: "ARM64 (MSI)",
-                    value: "https://netbird.axtesys.it/pkgs/windows/msi/arm64",
-                  },
+                    value: "https://netbird.axtesys.it/pkgs/windows/amd64",
+                  }
                 ]}
               />
               <Link

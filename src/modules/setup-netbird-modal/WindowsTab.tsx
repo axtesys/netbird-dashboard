@@ -47,7 +47,7 @@ export default function WindowsTab({
                 options={[
                   {
                     label: "64-Bit",
-                    value: "https://netbird.axtesys.it/pkgs/windows/amd64",
+                    value: "https://netbird.axtesys.it/pkgs/windows/amd64/netbird-installer.exe",
                   }
                 ]}
               />

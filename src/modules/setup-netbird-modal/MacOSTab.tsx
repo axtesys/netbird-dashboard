@@ -1,22 +1,9 @@
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@components/Accordion";
 import Button from "@components/Button";
 import Code from "@components/Code";
-import Separator from "@components/Separator";
 import Steps from "@components/Steps";
 import TabsContentPadding, { TabsContent } from "@components/Tabs";
-import { GRPC_API_ORIGIN, pkgsDownloadUrl } from "@utils/netbird";
-import {
-  BeerIcon,
-  DownloadIcon,
-  ExternalLinkIcon,
-  PackageOpenIcon,
-  TerminalSquareIcon,
-} from "lucide-react";
+import { GRPC_API_ORIGIN } from "@utils/netbird";
+import { ExternalLinkIcon, PackageOpenIcon } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 import { OperatingSystem } from "@/interfaces/OperatingSystem";
@@ -32,6 +19,10 @@ type Props = {
   showSetupKeyInfo?: boolean;
   hostname?: string;
 };
+
+// AXTESYS CHANGE: macOS installs exclusively via the axtesys HomeBrew tap
+// (CLI formula + upstream-signed UI cask). Upstream's direct
+// installer and install.sh options are dropped — we host neither.
 export default function MacOSTab({
   setupKey,
   setupKeyContent,
@@ -39,14 +30,10 @@ export default function MacOSTab({
   showSetupKeyInfo,
   hostname,
 }: Readonly<Props>) {
-  // Mirrors WindowsTab: server flow (setupKeyContent present) forces
-  // the CLI run branch so the netbird up command stays visible while
-  // the operator generates a key.
-  const useCliRun = !!setupKey || !!setupKeyContent;
-  const baseMgmtStep = 2;
-  const keyStep = GRPC_API_ORIGIN ? 3 : 2;
-  const runStep = keyStep + (setupKeyContent ? 1 : 0);
   const usingSetupKeyParam = !!setupKey || !!setupKeyPlaceholder;
+  const mgmtStep = 4;
+  const keyStep = GRPC_API_ORIGIN ? 5 : 4;
+  const runStep = keyStep + (setupKeyContent ? 1 : 0);
   return (
     <TabsContent value={String(OperatingSystem.APPLE)}>
       <TabsContentPadding>
@@ -56,25 +43,53 @@ export default function MacOSTab({
         </p>
         <Steps>
           <Steps.Step step={1}>
-            <div className={"flex items-center gap-1 text-sm font-light"}>
-              Download and run macOS Installer
-            </div>
-            <div className={"flex gap-4 mt-1 flex-wrap"}>
-              <Link
-                href={pkgsDownloadUrl("macos/universal")}
-                passHref
-                target={"_blank"}
-              >
+            <p>Install HomeBrew</p>
+            <div className={"flex gap-4 mt-1"}>
+              <Link href={"https://brew.sh/"} passHref target={"_blank"}>
                 <Button variant={"primary"}>
-                  <DownloadIcon size={14} />
-                  Download NetBird
+                  <ExternalLinkIcon size={14} />
+                  HomeBrew Installation Guide
                 </Button>
               </Link>
             </div>
           </Steps.Step>
+          <Steps.Step step={2}>
+            <p>Add the axtesys tap and install NetBird</p>
+            <Code
+              codeToCopy={[
+                `brew tap axtesys/netbird https://github.com/axtesys/netbird-homebrew-tap.git`,
+                `brew install axtesys/netbird/netbird`,
+                `brew install --cask axtesys/netbird/netbird-ui`,
+              ].join("\n")}
+            >
+              <Code.Comment># add the axtesys tap</Code.Comment>
+              <Code.Line>
+                brew tap axtesys/netbird
+                https://github.com/axtesys/netbird-homebrew-tap.git
+              </Code.Line>
+              <Code.Comment># CLI only</Code.Comment>
+              <Code.Line>brew install axtesys/netbird/netbird</Code.Line>
+              <Code.Comment># GUI package</Code.Comment>
+              <Code.Line>
+                brew install --cask axtesys/netbird/netbird-ui
+              </Code.Line>
+            </Code>
+          </Steps.Step>
+          <Steps.Step step={3}>
+            <p>Start the NetBird daemon</p>
+            <Code
+              codeToCopy={[
+                `sudo netbird service install`,
+                `sudo netbird service start`,
+              ].join("\n")}
+            >
+              <Code.Line>sudo netbird service install</Code.Line>
+              <Code.Line>sudo netbird service start</Code.Line>
+            </Code>
+          </Steps.Step>
 
           {GRPC_API_ORIGIN && (
-            <Steps.Step step={baseMgmtStep}>
+            <Steps.Step step={mgmtStep}>
               <p>
                 {`Click on "Settings" then "Advanced Settings" from the NetBird icon in your system tray and enter the following "Management URL"`}
               </p>
@@ -88,123 +103,18 @@ export default function MacOSTab({
             <Steps.Step step={keyStep}>{setupKeyContent}</Steps.Step>
           )}
 
-          {useCliRun ? (
-            <Steps.Step step={runStep} line={false}>
-              <p>
-                Open Terminal and run NetBird{" "}
-                {showSetupKeyInfo && <RoutingPeerSetupKeyInfo />}
-              </p>
-
-              <NetBirdUpCommand
-                setupKey={setupKey}
-                setupKeyPlaceholder={setupKeyPlaceholder}
-                hostname={hostname}
-              />
-            </Steps.Step>
-          ) : (
-            <>
-              <Steps.Step step={runStep}>
-                <p>
-                  {/* eslint-disable-next-line react/no-unescaped-entities */}
-                  Click on "Connect" from the NetBird icon in your system tray
-                </p>
-              </Steps.Step>
-              <Steps.Step step={runStep + 1} line={false}>
-                <p>Sign up using your email address</p>
-              </Steps.Step>
-            </>
-          )}
+          <Steps.Step step={runStep} line={false}>
+            <p>
+              Run NetBird {!usingSetupKeyParam && "and log in the browser"}
+              {showSetupKeyInfo && <RoutingPeerSetupKeyInfo />}
+            </p>
+            <NetBirdUpCommand
+              setupKey={setupKey}
+              setupKeyPlaceholder={setupKeyPlaceholder}
+              hostname={hostname}
+            />
+          </Steps.Step>
         </Steps>
-      </TabsContentPadding>
-      <Separator />
-      <TabsContentPadding>
-        <Accordion type="single" collapsible>
-          <AccordionItem value="item-1">
-            <AccordionTrigger>
-              <TerminalSquareIcon size={16} />
-              Install manually with Terminal
-            </AccordionTrigger>
-            <AccordionContent>
-              <Steps>
-                <Steps.Step step={1}>
-                  <Code>
-                    curl -fsSL https://pkgs.netbird.io/install.sh | sh
-                  </Code>
-                </Steps.Step>
-                <Steps.Step step={2} line={false}>
-                  <p>
-                    Run NetBird {!usingSetupKeyParam && "and log in the browser"}
-                    {showSetupKeyInfo && <RoutingPeerSetupKeyInfo />}
-                  </p>
-                  <NetBirdUpCommand
-                    setupKey={setupKey}
-                    setupKeyPlaceholder={setupKeyPlaceholder}
-                    hostname={hostname}
-                  />
-                </Steps.Step>
-              </Steps>
-            </AccordionContent>
-          </AccordionItem>
-        </Accordion>
-      </TabsContentPadding>
-      <Separator />
-      <TabsContentPadding>
-        <Accordion type="single" collapsible>
-          <AccordionItem value="item-1">
-            <AccordionTrigger>
-              <BeerIcon size={16} /> Install manually with HomeBrew
-            </AccordionTrigger>
-            <AccordionContent>
-              <Steps>
-                <Steps.Step step={1}>
-                  <p>Download and install HomeBrew</p>
-                  <div className={"flex gap-4"}>
-                    <Link href={"https://brew.sh/"} passHref target={"_blank"}>
-                      <Button variant={"primary"}>
-                        <ExternalLinkIcon size={14} />
-                        HomeBrew Installation Guide
-                      </Button>
-                    </Link>
-                  </div>
-                </Steps.Step>
-                <Steps.Step step={2}>
-                  <p>Install NetBird </p>
-                  <Code
-                    codeToCopy={[
-                      `brew install netbirdio/tap/netbird`,
-                      `brew install --cask netbirdio/tap/netbird-ui`,
-                    ].join("\n")}
-                  >
-                    <Code.Comment># for CLI only</Code.Comment>
-                    <Code.Line>brew install netbirdio/tap/netbird</Code.Line>
-                    <Code.Comment># for GUI package</Code.Comment>
-                    <Code.Line>
-                      brew install --cask netbirdio/tap/netbird-ui
-                    </Code.Line>
-                  </Code>
-                </Steps.Step>
-                <Steps.Step step={3}>
-                  <p>Start NetBird daemon</p>
-                  <Code>
-                    <Code.Line>sudo netbird service install</Code.Line>
-                    <Code.Line>sudo netbird service start</Code.Line>
-                  </Code>
-                </Steps.Step>
-                <Steps.Step step={4} line={false}>
-                  <p>
-                    Run NetBird {!usingSetupKeyParam && "and log in the browser"}
-                    {showSetupKeyInfo && <RoutingPeerSetupKeyInfo />}
-                  </p>
-                  <NetBirdUpCommand
-                    setupKey={setupKey}
-                    setupKeyPlaceholder={setupKeyPlaceholder}
-                    hostname={hostname}
-                  />
-                </Steps.Step>
-              </Steps>
-            </AccordionContent>
-          </AccordionItem>
-        </Accordion>
       </TabsContentPadding>
     </TabsContent>
   );

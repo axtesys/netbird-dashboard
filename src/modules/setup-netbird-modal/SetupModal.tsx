@@ -125,8 +125,11 @@ export function SetupModalContent({
   //   hideMobile  – server flow (explicit false), or legacy callers
   //                 that already have a setupKey (routing peers etc.).
   //   showKeyGen  – server flow, and the caller didn't pre-supply a key.
-  const hideDocker = isUserDevice === true;
-  const hideMobile = isUserDevice === false || !!setupKey;
+  // AXTESYS CHANGE: never offer the Docker or mobile (iOS/Android) tabs —
+  // axtesys self-serve only ships Linux/macOS/Windows. Ride upstream's
+  // hide flags rather than commenting out the JSX.
+  const hideDocker = true;
+  const hideMobile = true;
   const showKeyGenerator = isUserDevice === false && !setupKey;
 
   // setupKeyPlaceholder keeps the `--setup-key SETUP_KEY` token visible

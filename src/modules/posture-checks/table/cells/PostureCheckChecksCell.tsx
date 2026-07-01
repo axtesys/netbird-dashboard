@@ -1,8 +1,9 @@
 import { cn } from "@utils/helpers";
-import { Disc3Icon, FlagIcon, NetworkIcon, ServerCogIcon } from "lucide-react";
+import { Disc3Icon, FlagIcon, NetworkIcon, ServerCogIcon, ShieldCheck } from "lucide-react";
 import * as React from "react";
 import NetBirdIcon from "@/assets/icons/NetBirdIcon";
 import { PostureCheck } from "@/interfaces/PostureCheck";
+import { CertificateTooltip } from "@/modules/posture-checks/checks/tooltips/CertificateTooltip";
 import { GeoLocationTooltip } from "@/modules/posture-checks/checks/tooltips/GeoLocationTooltip";
 import { NetBirdVersionTooltip } from "@/modules/posture-checks/checks/tooltips/NetBirdVersionTooltip";
 import { OperatingSystemTooltip } from "@/modules/posture-checks/checks/tooltips/OperatingSystemTooltip";
@@ -89,12 +90,24 @@ export const PostureCheckChecksCell = ({
             <ProcessTooltip check={check.checks.process_check}>
               <div
                 className={cn(
-                  "bg-gradient-to-tr from-nb-gray-500 to-nb-gray-300 h-8 w-8 rounded-full flex items-center justify-center relative z-[8] hover:scale-[1.1] transition-all",
+                  "bg-gradient-to-tr from-nb-gray-500 to-nb-gray-300 h-8 w-8 rounded-full flex items-center justify-center relative z-[7] hover:scale-[1.1] transition-all",
                 )}
               >
                 <ServerCogIcon size={14} />
               </div>
             </ProcessTooltip>
+          )}
+
+          {check.checks.certificate_check && (
+            <CertificateTooltip>
+              <div
+                className={cn(
+                  "bg-gradient-to-tr from-amber-500 to-amber-400 h-8 w-8 rounded-full flex items-center justify-center relative z-[6] hover:scale-[1.1] transition-all",
+                )}
+              >
+                <ShieldCheck size={14} />
+              </div>
+            </CertificateTooltip>
           )}
         </div>
         {children}

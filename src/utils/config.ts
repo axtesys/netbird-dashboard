@@ -81,8 +81,13 @@ const loadConfig = (): Config => {
     googleAnalyticsID: configJson?.googleAnalyticsID || undefined,
     googleTagManagerID: configJson?.googleTagManagerID || undefined,
     authServiceUrl: configJson?.authServiceUrl ?? undefined,
+    // AXTESYS CHANGE: self-hosted WASM client built from the axtesys fork
+    // (carries posture-cert/native-ACL changes), version-pinned to the core
+    // build. Bump this in lockstep with public/wasm_exec.js and the hosted
+    // artifact on each replay.
     wasmPath:
-      configJson?.wasmPath || "https://pkgs.netbird.io/wasm/client/v0.63.0",
+      configJson?.wasmPath ||
+      "https://netbird.axtesys.it/pkgs/wasm/client/v0.74.0-axt",
     licensed: configJson?.licensed === "true",
     cloud: configJson?.cloud === "true",
     agentNetworkOnly: configJson?.agentNetworkOnly === "true",

@@ -28,7 +28,10 @@ export default function WindowsTab({
   showSetupKeyInfo,
   hostname,
 }: Readonly<Props>) {
-  const [windowsUrl, setWindowsUrl] = useState(pkgsDownloadUrl("windows/x64"));
+  // AXTESYS CHANGE: axtesys pkgs folder scheme /pkgs/windows/{arch}/{file}.
+  const [windowsUrl, setWindowsUrl] = useState(
+    pkgsDownloadUrl("windows/amd64/netbird-installer.exe"),
+  );
   // The CLI-run branch is required for the server flow (setupKeyContent
   // present) even before a key is generated — the placeholder keeps the
   // command shape consistent. Otherwise we fall back to the existing
@@ -56,19 +59,19 @@ export default function WindowsTab({
                 options={[
                   {
                     label: "64-Bit",
-                    value: pkgsDownloadUrl("windows/x64"),
+                    value: pkgsDownloadUrl("windows/amd64/netbird-installer.exe"),
                   },
                   {
                     label: "ARM64",
-                    value: pkgsDownloadUrl("windows/arm64"),
+                    value: pkgsDownloadUrl("windows/arm64/netbird-installer.exe"),
                   },
                   {
                     label: "64-Bit (MSI)",
-                    value: pkgsDownloadUrl("windows/msi/x64"),
+                    value: pkgsDownloadUrl("windows/amd64/netbird-installer.msi"),
                   },
                   {
                     label: "ARM64 (MSI)",
-                    value: pkgsDownloadUrl("windows/msi/arm64"),
+                    value: pkgsDownloadUrl("windows/arm64/netbird-installer.msi"),
                   },
                 ]}
               />
